@@ -25,7 +25,7 @@
                             name="password"
                             required autocomplete="new-password" />
 
-            <x-input-error :messages="$errors->get('password')" class="invalid-feedback" />
+            <x-input-error :messages="$errors->get('password')" />
         </div>
 
         <!-- Confirm Password -->
@@ -36,7 +36,7 @@
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="invalid-feedback" />
+            <x-input-error :messages="$errors->get('password_confirmation')" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
@@ -46,6 +46,7 @@
 
             <x-primary-button class="btn btn-primary w-100">
                 {{ __('Register') }}
+                
             </x-primary-button>
         </div>
     </form>
