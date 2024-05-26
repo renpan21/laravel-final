@@ -86,7 +86,9 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize('view',$post);
-        $post->delete();
+        $post->delete([
+            'id' => Post::where('id', Auth::user()->id)->get()
+        ]);
         return redirect()->route('post.index')->with('message', 'Post Successfully Deleted!!');
     }
     
@@ -94,4 +96,13 @@ class PostController extends Controller
         $posts = Post::where('status', 1)->get();
         return view('pages.index', ['posts' => $posts]);
     }
+
+    public function posts()
+    {
+        
+        $posts = Post::where('status', 1)->get();
+        return view('pages.posts', ['posts' => $posts]);
+    }
+
+    
 }

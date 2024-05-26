@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +22,8 @@ Route::get('/', [PostController::class, 'postIndex'])->name('post.postIndex');
 
 
 Route::middleware('auth', 'verified')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    
+    Route::get('/dashboard',[HomeController::class, 'Dashboard'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -36,6 +37,9 @@ Route::middleware('auth', 'verified')->group(function () {
     // Route::get('/post/{post}',[PostController::class, 'show'])->name('post.show');
     // Route::delete('/post/{post}',[PostController::class, 'destroy'])->name('post.destroy');
     Route::resource('post', PostController::class);
+    Route::get('/posts', [PostController::class, 'posts'])->name('pages.posts');
+    // Route::get('/', [PostController::class, 'postIndex'])->name('post.postIndex');
+    Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
 });
 
 require __DIR__.'/auth.php';
