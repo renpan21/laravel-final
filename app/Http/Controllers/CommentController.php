@@ -31,11 +31,12 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-
+        
         
         
       Comment::create([
-            'post_id' => Post::where('user_id', Auth::user()->id)->where('status', 1)->value('id'),
+            'post_id' => $request->post_id,
+            'user_id' => Auth::user()->id,
             'comment' => $request->comment,
             'status' => (is_null($request->status)? 0 : 1),
         ]);

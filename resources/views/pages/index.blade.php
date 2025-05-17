@@ -47,6 +47,8 @@
                     </div>
                     @isset($posts)
                         @foreach ($posts as $post)
+                        <form action="{{ route ('comment.store')}}" method="post">
+                            @csrf 
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$post -> subject}}</h5>
@@ -54,8 +56,15 @@
                                     {{$post -> post}}
                                     <hr>
                                     <p class="font-monospace"> For feedback you can email the author on  <a href="">{{$post->user->email}}</a></p>
+                                    <hr>
+                                    @foreach($post->comment as $comments)
+                                    <p><small><b>Author:</b>{{$post->user->name}}</small></p>
+                                     <p><small><b>Comment:</b>{{$comments->comment}}</small></p>
+                                     <hr>
+                                    @endforeach
                                 </div>
                             </div>
+                        </form>
                         @endforeach
                     @endisset
                 </div>

@@ -62,10 +62,17 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{$post -> subject}}</h5>
                                     <p><small><b>Author:</b>{{$post-> user->name}}</small></p>
+                                  
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
                                     {{$post -> post}}
                                     <hr>
                                     <p class="font-monospace"> For feedback you can email the author on  <a href="">{{$post->user->email}}</a></p>
                                     <hr>
+                                    @foreach($post->comment as $comments)
+                                        
+                                    <p><small><b>Author:</b>{{$comments->user->name}}</small></p>
+                                     <p><small><b>Comment:</b>{{$comments->comment}}</small></p>
+                                    @endforeach
                                     <textarea name="comment" id="comment" class="w-100"></textarea>
                                     <div class="w-100 mt-1 ">
                                         <button type= "submit" class="btn btn-primary w-30">Save Post</button>
